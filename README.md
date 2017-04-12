@@ -8,8 +8,8 @@ seen any JVM bytecode tools written in clojure.
 
 Clojure seems to excel at data manipulation. Transforming bytecode, on the surface,
 would appear to be a series of data transformations. This is an experiment regarding 
-the application of functional techniques towards a more elegant,
-and simpler implementation of a byte code manipulation library.
+the application of functional techniques towards a simpler implementation of a byte 
+code manipulation library.
 
 ## Usage
 ...Nothing to see yet...
