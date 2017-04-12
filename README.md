@@ -3,7 +3,7 @@
 # Introduction
 
 There are many libraries available for manipulating JVM bytecode:
-bcel, asm, bytebuddy, byteman, javassist, etc. However, I have not
+bcel, asm, bytebuddy, cglib, byteman, javassist, etc. However, I have not
 seen any JVM bytecode tools written in clojure.
 
 Clojure seems to excel at data manipulation. Transforming bytecode, on the surface,
