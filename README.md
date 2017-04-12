@@ -1,6 +1,6 @@
 # cafebabe
 
-# Introduction to cafebabe
+# Introduction
 
 There are many libraries available for manipulating JVM bytecode:
 bcel, asm, bytebuddy, byteman, javassist, etc. However, I have not
