@@ -2,5 +2,13 @@
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.8.0"]])
+            :url  "http://www.eclipse.org/legal/epl-v10.html"}
+  :dependencies [[org.clojure/clojure "1.8.0"]
+                 [gloss "0.2.6"]
+                 [org.clojure/tools.trace "0.7.9"]]
+  :profiles {:uberjar {:aot :all}
+             :test    {:java-source-paths ["java"]}
+             :dev     {:source-paths      ["dev"]
+                       :java-source-paths ["java"]
+                       :dependencies      [[org.clojure/tools.namespace "0.2.11"]
+                                           [org.clojure/java.classpath "0.2.3"]]}})
