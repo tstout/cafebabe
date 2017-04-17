@@ -4,7 +4,8 @@
                                 string
                                 repeated
                                 header
-                                prefix]]))
+                                prefix
+                                finite-frame]]))
 
 ;;
 ;; Look here for more examples:
@@ -146,10 +147,6 @@
            :name-index       :uint16
            :descriptor-index :uint16})
 
-(defcodec c-str
-          (repeated :ubyte :prefix :uint16))
-
-
 ;CONSTANT_Utf8_info {
 ;                    u1 tag;
 ;                    u2 length;
@@ -157,7 +154,7 @@
 ;                    }
 (defcodec utf8-info
           {:constant-type :c-utf8
-           :str           c-str})
+           :str           (finite-frame :uint16 (string :utf8))})
 
 ;CONSTANT_MethodHandle_info {
 ;                            u1 tag;
