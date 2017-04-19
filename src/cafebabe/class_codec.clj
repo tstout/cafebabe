@@ -25,6 +25,7 @@
 ;           }
 
 (ns cafebabe.class-codec
+  "Define a gloss codec for reading/writing java class files."
   (:require [gloss.core :refer [defcodec
                                 enum
                                 string
