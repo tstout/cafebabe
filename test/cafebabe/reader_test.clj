@@ -4,9 +4,6 @@
            (cafebabe.prototypes Empty)))
 
 
-
-
-
-(deftest something
+(deftest java-compile-working
   (let [eClass (Empty.)]
     (is (= 1 1))))
