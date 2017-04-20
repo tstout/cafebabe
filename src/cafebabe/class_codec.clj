@@ -179,25 +179,14 @@
           (repeated method-info :prefix :uint16))
 
 
-(def class-def [class-hdr
-                cp-info
-                (ordered-map
-                  :access-flags :uint16
-                  :this-class :uint16
-                  :super-class :uint16)
-                interfaces
-                fields
-                c-methods
-                attributes])
-
 (defcodec class-codec
-          [class-hdr
-           cp-info
-           (ordered-map
+          (ordered-map
+             :header class-hdr
+             :constant-pool cp-info
              :access-flags :uint16
              :this-class :uint16
-             :super-class :uint16)
-           interfaces
-           fields
-           c-methods
-           attributes])
+             :super-class :uint16
+             :interfaces interfaces
+             :fields fields
+             :methods c-methods
+             :attributes attributes))
