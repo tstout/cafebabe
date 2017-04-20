@@ -29,8 +29,23 @@
     class-file-path
     slurp-bytes))
 
+(defn fix-nil-repeated
+  "If the class has no fields or interfaces, gloss decodes a repeated
+  to a nil. This nil causes encode to fail. I have not determined
+  how to get gloss to decode an empty repeated into an empty vector.
+  This fix is necessary for encode to function properyly when a class
+  contains no interfaces or methods."
+  [class-data k]
+  (if (nil? (k class-data))
+    (update class-data k (fn [_] []))
+    class-data))
+
+;;
 (defn parse-class [^Class c]
-  (decode class-codec (class-bytes c) false))
+  (->
+    (decode class-codec (class-bytes c) false)
+    (fix-nil-repeated :interfaces)
+    (fix-nil-repeated :fields)))
 
 ;;
 ;; REPL Experiments...

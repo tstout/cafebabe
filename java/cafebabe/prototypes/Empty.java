@@ -1,5 +1,5 @@
 package cafebabe.prototypes;
 
-public class Empty implements Cloneable {
-    public final int xField = 0;
+public class Empty {
+    //public final int xField = 0;
 }
