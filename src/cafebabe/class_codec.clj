@@ -144,7 +144,7 @@
           (repeated constant-pool :prefix (prefix :uint16 dec inc)))
 
 
-;; This this be a vector when empty?
+;; This be a vector when empty?
 (defcodec interfaces
           (repeated :uint16 :prefix :uint16))
 
@@ -178,6 +178,17 @@
 (defcodec c-methods
           (repeated method-info :prefix :uint16))
 
+
+(def class-def [class-hdr
+                cp-info
+                (ordered-map
+                  :access-flags :uint16
+                  :this-class :uint16
+                  :super-class :uint16)
+                interfaces
+                fields
+                c-methods
+                attributes])
 
 (defcodec class-codec
           [class-hdr

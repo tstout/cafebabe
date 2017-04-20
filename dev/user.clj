@@ -11,6 +11,7 @@
   (require
     '[clojure.string :as str]
     '[cafebabe.reader :as rdr]
+    '[cafebabe.writer :as wrt]
     '[cafebabe.class-codec :as codec]
     '[gloss.core :as gc]
     '[gloss.io :as gio]
