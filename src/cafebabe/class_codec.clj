@@ -1,31 +1,30 @@
-;;
-;; Look here for more examples:
-;; https://github.com/d-t-w/by-example-gloss/blob/master/src/by_example_gloss/core.clj
-
-
-; From https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html
-;
-;ClassFile {
-;           u4             magic;
-;           u2             minor_version;
-;           u2             major_version;
-;           u2             constant_pool_count;
-;           cp_info        constant_pool[constant_pool_count-1];
-;           u2             access_flags;
-;           u2             this_class;
-;           u2             super_class;
-;           u2             interfaces_count;
-;           u2             interfaces[interfaces_count];
-;           u2             fields_count;
-;           field_info     fields[fields_count];
-;           u2             methods_count;
-;           method_info    methods[methods_count];
-;           u2             attributes_count;
-;           attribute_info attributes[attributes_count];
-;           }
-
 (ns cafebabe.class-codec
-  "Define a gloss codec for reading/writing java class files."
+  "Define a gloss codec for reading/writing java class files.
+
+  From https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html
+
+  ClassFile {
+             u4             magic;
+             u2             minor_version;
+             u2             major_version;
+             u2             constant_pool_count;
+             cp_info        constant_pool[constant_pool_count-1];
+             u2             access_flags;
+             u2             this_class;
+             u2             super_class;
+             u2             interfaces_count;
+             u2             interfaces[interfaces_count];
+             u2             fields_count;
+             field_info     fields[fields_count];
+             u2             methods_count;
+             method_info    methods[methods_count];
+             u2             attributes_count;
+             attribute_info attributes[attributes_count];
+             }
+
+   Look here for examples regarding usage of gloss:
+   https://github.com/d-t-w/by-example-gloss/blob/master/src/by_example_gloss/core.clj
+   "
   (:require [gloss.core :refer [defcodec
                                 enum
                                 string
@@ -152,7 +151,7 @@
 (defcodec attribute-info
           {
            :attribute-name-index :uint16
-           :info (repeated :ubyte :prefix :uint32)})
+           :info                 (repeated :ubyte :prefix :uint32)})
 
 
 (defcodec attributes
@@ -160,10 +159,10 @@
 
 (defcodec field-info
           (ordered-map
-           :access-flags :uint16
-           :name-index :uint16
-           :descriptor-index :uint16
-           :attributes attributes))
+            :access-flags :uint16
+            :name-index :uint16
+            :descriptor-index :uint16
+            :attributes attributes))
 
 (defcodec fields
           (repeated field-info :prefix :uint16))
@@ -181,12 +180,12 @@
 
 (defcodec class-codec
           (ordered-map
-             :header class-hdr
-             :constant-pool cp-info
-             :access-flags :uint16
-             :this-class :uint16
-             :super-class :uint16
-             :interfaces interfaces
-             :fields fields
-             :methods c-methods
-             :attributes attributes))
+            :header class-hdr
+            :constant-pool cp-info
+            :access-flags :uint16
+            :this-class :uint16
+            :super-class :uint16
+            :interfaces interfaces
+            :fields fields
+            :methods c-methods
+            :attributes attributes))

@@ -1,5 +1,7 @@
 package cafebabe.prototypes;
 
+//
+// Minimal class for initial testing...
+//
 public class Empty {
-    //public final int xField = 0;
 }

@@ -13,6 +13,7 @@
     '[cafebabe.reader :as rdr]
     '[cafebabe.writer :as wrt]
     '[cafebabe.class-codec :as codec]
+    '[cafebabe.constant-pool :as cp]
     '[gloss.core :as gc]
     '[gloss.io :as gio]
     '[clojure.tools.trace :as trace]))
