@@ -14,6 +14,7 @@
     '[cafebabe.writer :as wrt]
     '[cafebabe.class-codec :as codec]
     '[cafebabe.constant-pool :as cp]
+    '[cafebabe.methods :as meth]
     '[gloss.core :as gc]
     '[gloss.io :as gio]
     '[clojure.tools.trace :as trace]))

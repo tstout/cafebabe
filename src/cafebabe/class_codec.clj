@@ -34,6 +34,7 @@
                                 finite-frame
                                 ordered-map]]))
 
+
 (defcodec class-hdr
           {:magic         :uint32
            :minor-version :uint16
@@ -178,6 +179,40 @@
           (repeated method-info :prefix :uint16))
 
 
+(defcodec exception-table
+          (ordered-map
+            :start-pc :uint16
+            :end-pc :uint16
+            :handler-pc :unt16
+            :catch-type :uint16))
+
+;Code_attribute {
+;                u2 attribute_name_index;
+;                u4 attribute_length;
+;                u2 max_stack;
+;                u2 max_locals;
+;                u4 code_length;
+;                u1 code[code_length];
+;                   u2 exception_table_length;
+;                   {   u2 start_pc;
+;                    u2 end_pc;
+;                    u2 handler_pc;
+;                    u2 catch_type;
+;                    } exception_table[exception_table_length];
+;                u2 attributes_count;
+;                attribute_info attributes[attributes_count];
+;                }
+(defcodec code-attribute
+          (ordered-map
+            :attribute-name-index :uint16
+            :attribute-length :uint32
+            :max-stack :uint16
+            :max-locals :uint16))
+            ;;:code (repeated :ubyte)))
+            ;:exception-table (repeated exception-table :prefix :uint16)
+            ;:attributes attributes))
+
+
 (defcodec class-codec
           (ordered-map
             :header class-hdr
@@ -189,3 +224,6 @@
             :fields fields
             :methods c-methods
             :attributes attributes))
+
+(defcodec raw-bytes
+          (repeated :ubyte :prefix :uint16))
