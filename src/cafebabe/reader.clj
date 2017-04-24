@@ -54,20 +54,19 @@
                          vec)]
     (update class-data :fields (fn [_] updated-fields))))
 
-  ;;
-  (defn parse-class [^Class c]
-    (->
-      class-codec
-      (decode  (class-bytes c) false)
-      (fix-nil-repeated :interfaces)
-      (fix-nil-repeated :fields)
-      fix-nil-field-attrs))
+(defn parse-class [^Class c]
+  (->
+    class-codec
+    (decode (class-bytes c) false)
+    (fix-nil-repeated :interfaces)
+    (fix-nil-repeated :fields)
+    fix-nil-field-attrs))
 
-  ;;
-  ;; REPL Experiments...
-  ;;
-  (comment
+;;
+;; REPL Experiments...
+;;
+(comment
 
-    (use 'clojure.tools.trace)
-    ()
-    (trace-ns gloss.core))
+  (use 'clojure.tools.trace)
+  ()
+  (trace-ns gloss.core))

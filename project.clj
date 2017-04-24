@@ -5,10 +5,14 @@
             :url  "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [gloss "0.2.6"]
-                 [org.clojure/tools.trace "0.7.9"]]
+                 [org.clojure/tools.trace "0.7.9"]
+                 [expectations "2.2.0-beta1"]]
   :profiles {:uberjar {:aot :all}
-             :test    {:java-source-paths ["java"]}
+             :test    {:java-source-paths ["java"]
+                       :dependencies [[expectations "2.2.0-beta1"]]}
              :dev     {:source-paths      ["dev"]
                        :java-source-paths ["java"]
                        :dependencies      [[org.clojure/tools.namespace "0.2.11"]
-                                           [org.clojure/java.classpath "0.2.3"]]}})
+                                           [org.clojure/java.classpath "0.2.3"]]}}
+  :plugins [[lein-expectations "0.0.7"]
+            [lein-autoexpect "1.9.0"]])

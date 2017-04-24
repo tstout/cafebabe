@@ -1,9 +1,11 @@
 (ns cafebabe.reader-test
-  (:require [clojure.test :refer :all])
+  (:require [expectations :refer :all]
+            [cafebabe.reader :refer [parse-class]]
+            [cafebabe.fixtures :refer [empty-class]])
   (:import (java.io ByteArrayOutputStream)
            (cafebabe.prototypes Empty)))
 
 
-(deftest java-compile-working
-  (let [eClass (Empty.)]
-    (is (= 1 1))))
+(expect empty-class
+        (parse-class Empty))
+
