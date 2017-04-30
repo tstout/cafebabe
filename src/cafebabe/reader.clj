@@ -8,8 +8,6 @@
                                           cp-info]])
   (:import (java.io ByteArrayOutputStream)))
 
-
-
 (defn slurp-bytes
   "Convert the specified file to a byte array"
   [src]

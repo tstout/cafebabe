@@ -6,6 +6,13 @@
            (cafebabe.prototypes Empty)))
 
 
+;;
+;; Verify parse class creates data which
+;; conforms to the expected structure for
+;; a miminmal, empty java class
+;;
 (expect empty-class
         (parse-class Empty))
+
+
 

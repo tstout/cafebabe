@@ -11,7 +11,7 @@
   (require
     '[clojure.string :as str]
     '[cafebabe.reader :as rdr]
-    '[cafebabe.writer :as wrt]
+    ;;'[cafebabe.writer :as wrt]
     '[cafebabe.class-codec :as codec]
     '[cafebabe.constant-pool :as cp]
     '[cafebabe.methods :as meth]

@@ -9,7 +9,8 @@
                  [expectations "2.2.0-beta1"]]
   :profiles {:uberjar {:aot :all}
              :test    {:java-source-paths ["java"]
-                       :dependencies [[expectations "2.2.0-beta1"]]}
+                       :dependencies [[expectations "2.2.0-beta1"]
+                                      [digest "1.4.5"]]}
              :dev     {:source-paths      ["dev"]
                        :java-source-paths ["java"]
                        :dependencies      [[org.clojure/tools.namespace "0.2.11"]
