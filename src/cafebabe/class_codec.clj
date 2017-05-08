@@ -1,6 +1,5 @@
 (ns cafebabe.class-codec
   "Define a gloss codec for reading/writing java class files.
-
   From https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html
 
   ClassFile {
@@ -204,13 +203,13 @@
 ;                }
 (defcodec code-attribute
           (ordered-map
-            :attribute-name-index :uint16
+            ;;:attribute-name-index :uint16
             :attribute-length :uint32
             :max-stack :uint16
-            :max-locals :uint16))
-            ;;:code (repeated :ubyte)))
-            ;:exception-table (repeated exception-table :prefix :uint16)
-            ;:attributes attributes))
+            :max-locals :uint16
+            :code (repeated :ubyte)
+            :exception-table (repeated exception-table :prefix :uint16)
+            :attributes attributes))
 
 
 (defcodec class-codec
@@ -224,6 +223,7 @@
             :fields fields
             :methods c-methods
             :attributes attributes))
+
 
 (defcodec raw-bytes
           (repeated :ubyte :prefix :uint16))

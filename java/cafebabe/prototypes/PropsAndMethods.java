@@ -6,41 +6,48 @@ public class PropsAndMethods {
     public final double doubleField;
     public final float floatField;
     public final byte byteField;
+    public final byte[] byteArrayField;
 
     public PropsAndMethods(
             int intField,
             String strField,
             double doubleField,
             float floatField,
-            byte byteField) {
+            byte byteField,
+            byte[] byteArrayField) {
         this.intField = intField;
         this.strField = strField;
         this.doubleField = doubleField;
         this.floatField = floatField;
         this.byteField = byteField;
+        this.byteArrayField = byteArrayField;
     }
 
-    public int intField() {
+    public int intFieldValue() {
         return intField;
     }
 
-    public String strField() {
+    public String strFieldValue() {
         return strField;
     }
 
-    public double doubleField() {
+    public double doubleFieldValue() {
         return doubleField;
     }
 
-    public float floatField() {
+    public float floatFieldValue() {
         return floatField;
     }
 
-    public byte returnByteField() {
+    public byte returnByteFieldValue() {
         return byteField;
     }
 
     public int sum(int a, int b) {
         return a + b;
+    }
+
+    public void invokeOtherClass() {
+        new HasThrowingMethod().foo(true);
     }
 }

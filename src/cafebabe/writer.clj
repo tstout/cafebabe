@@ -1,5 +1,13 @@
 (ns cafebabe.writer
   (:require [gloss.io :refer [encode contiguous]]
+            [gloss.core :refer [defcodec
+                                enum
+                                string
+                                repeated
+                                header
+                                prefix
+                                finite-frame
+                                ordered-map]]
             [cafebabe.class-codec :refer [class-codec]]
             [clojure.java.io :as io])
   (:import (java.io ByteArrayOutputStream FileOutputStream)
@@ -27,6 +35,12 @@
     (encode class-codec)
     contiguous
     bytes-to-array))
+
+(defcodec byte-vec
+          (repeated :ubyte :prefix :uint32))
+
+(defn vec-to-bytes [v]
+  (encode byte-vec v))
 
 
 
