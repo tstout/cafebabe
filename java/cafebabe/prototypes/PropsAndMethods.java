@@ -8,6 +8,16 @@ public class PropsAndMethods {
     public final byte byteField;
     public final byte[] byteArrayField;
 
+    public PropsAndMethods() {
+        intField = 0;
+        strField = "";
+        doubleField = 0.0;
+        floatField = 0.0f;
+        byteField = 'c';
+        byteArrayField = new byte[]{};
+    }
+
+
     public PropsAndMethods(
             int intField,
             String strField,

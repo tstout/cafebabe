@@ -1,6 +1,6 @@
 (ns cafebabe.reader-test
   (:require [expectations :refer :all]
-            [cafebabe.reader :refer [parse-class]]
+            [cafebabe.reader :refer [decode-class]]
             [cafebabe.fixtures :refer [empty-class]])
   (:import (java.io ByteArrayOutputStream)
            (cafebabe.prototypes Empty)))
@@ -12,7 +12,7 @@
 ;; a miminmal, empty java class
 ;;
 (expect empty-class
-        (parse-class Empty))
+        (decode-class Empty))
 
 
 

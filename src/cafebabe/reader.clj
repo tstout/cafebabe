@@ -6,7 +6,9 @@
                                           constant-type
                                           constant-pool
                                           cp-info]])
-  (:import (java.io ByteArrayOutputStream)))
+  (:import (java.io ByteArrayOutputStream)
+           (clojure.lang DynamicClassLoader)
+           (cafebabe.prototypes PropsAndMethods)))
 
 (defn slurp-bytes
   "Convert the specified file to a byte array"
@@ -26,6 +28,10 @@
     c
     class-file-path
     slurp-bytes))
+
+(defn class-bytes-from-file [path]
+  ())
+
 
 (defn fix-nil-repeated
   "If the class has no fields or interfaces, the gloss codec I have
@@ -52,13 +58,54 @@
                          vec)]
     (update class-data :fields (fn [_] updated-fields))))
 
-(defn parse-class [^Class c]
+(defn utf8? [c-info]
+  (= :c-utf8 (c-info :constant-type)))
+
+(defn fix-nil-utf8 [class-data]
+  (let [updated-fields (->>
+                         :constant-pool
+                         class-data
+                         (map (fn [c-info]
+                                (if (and (utf8? c-info) (nil? (c-info :str)))
+                                  (update c-info :str (fn [_] ""))
+                                  c-info)))
+                         vec)]
+    (update class-data :constant-pool (fn [_] updated-fields))))
+
+(defn decode-class [^Class c]
   (->
     class-codec
     (decode (class-bytes c) false)
     (fix-nil-repeated :interfaces)
     (fix-nil-repeated :fields)
-    fix-nil-field-attrs))
+    fix-nil-field-attrs
+    fix-nil-utf8))
+
+;(defn load-class [name bytes]
+;  (.defineClass
+;    ^DynamicClassLoader (deref clojure.lang.Compiler/LOADER)
+;    name
+;    bytes
+;    nil))
+
+(defn load-class [name bytes]
+  (->
+    (DynamicClassLoader.)
+    (.defineClass name bytes nil)))
+
+
+(defn load-class-file []
+  )
+
+
+
+
+;;
+;; loading classes on the fly...
+;;
+;(.defineClass ^DynamicClassLoader (deref clojure.lang.Compiler/LOADER)
+;              (str (:name options-map)) bytecode options)
+
 
 ;;
 ;; REPL Experiments...
@@ -66,5 +113,11 @@
 (comment
 
   (use 'clojure.tools.trace)
-  ()
-  (trace-ns gloss.core))
+
+  (def dyn-class
+    (rdr/load-class
+    "cafebabe.prototypes.PropsAndMethods"
+    (rdr/class-bytes cafebabe.prototypes.PropsAndMethods)))
+
+  (trace-ns gloss.core)
+  )

@@ -1,6 +1,6 @@
 (ns cafebabe.round-trip
   (:require [expectations :refer :all]
-            [cafebabe.reader :refer [parse-class class-bytes]]
+            [cafebabe.reader :refer [decode-class class-bytes]]
             [cafebabe.writer :refer [bytes-to-array class-to-file encode-class]]
             [cafebabe.class-codec :refer [class-codec]]
             [cafebabe.fixtures :refer [empty-class]]
@@ -17,10 +17,10 @@
 ;; such that the resulting class file is identical to the original class file.
 ;;
 (def proto-class-data
-  [{:class-inst Empty :data (parse-class Empty)}
-   {:class-inst PropsAndMethods :data (parse-class PropsAndMethods)}
-   {:class-inst PropsOnly :data (parse-class PropsOnly)}
-   {:class-inst HasThrowingMethod :data (parse-class HasThrowingMethod)}])
+  [{:class-inst Empty :data (decode-class Empty)}
+   {:class-inst PropsAndMethods :data (decode-class PropsAndMethods)}
+   {:class-inst PropsOnly :data (decode-class PropsOnly)}
+   {:class-inst HasThrowingMethod :data (decode-class HasThrowingMethod)}])
 
 (doseq [c-data proto-class-data]
   (let [{:keys [class-inst data]} c-data
