@@ -15,9 +15,11 @@
     '[cafebabe.class-codec :as codec]
     '[cafebabe.constant-pool :as cp]
     '[cafebabe.instructions :as ins]
+    '[cafebabe.probe :as probe]
     '[cafebabe.methods :as meth]
     '[gloss.core :as gc]
     '[gloss.io :as gio]
     '[clojure.tools.trace :as trace]))
 
-(load-vars)
+;; Loading this was causing lein autoexpect to fail.
+;;(load-vars)

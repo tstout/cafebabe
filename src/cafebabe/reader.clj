@@ -7,8 +7,7 @@
                                           constant-pool
                                           cp-info]])
   (:import (java.io ByteArrayOutputStream)
-           (clojure.lang DynamicClassLoader)
-           (cafebabe.prototypes PropsAndMethods)))
+           (clojure.lang DynamicClassLoader)))
 
 (defn slurp-bytes
   "Convert the specified file to a byte array"
@@ -114,10 +113,11 @@
 
   (use 'clojure.tools.trace)
 
-  (def dyn-class
-    (rdr/load-class
-    "cafebabe.prototypes.PropsAndMethods"
-    (rdr/class-bytes cafebabe.prototypes.PropsAndMethods)))
+  ;(def dyn-class
+  ;  (rdr/load-class
+  ;    "cafebabe.prototypes.PropsAndMethods"
+  ;    (rdr/class-bytes cafebabe.prototypes.PropsAndMethods)))
 
   (trace-ns gloss.core)
+
   )

@@ -60,4 +60,8 @@ public class PropsAndMethods {
     public void invokeOtherClass() {
         new HasThrowingMethod().foo(true);
     }
+
+//    public void callProbe() {
+//        cafebabe.Probe.onEntry("test val");
+//    }
 }

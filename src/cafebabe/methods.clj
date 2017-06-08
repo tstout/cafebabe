@@ -78,8 +78,8 @@
 ;; REPL experiments...
 ;;
 (comment
-  (def t-data (rdr/parse-class cafebabe.prototypes.PropsAndMethods))
-  (def t-code (-> (meth/meth-by-name t-data "sum") :code))
+  (def t-data (rdr/decode-class cafebabe.prototypes.PropsAndMethods))
+  (def t-code (-> (meth/method-by-name t-data "sum") :code))
   (def t-meth (meth/decode-method t-data "sum"))
   )
 
