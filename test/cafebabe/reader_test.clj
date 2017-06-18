@@ -11,8 +11,8 @@
 ;; conforms to the expected structure for
 ;; a miminmal, empty java class
 ;;
-(expect empty-class
-        (decode-class Empty))
+;(expect empty-class
+;        (decode-class Empty))
 
 
 
