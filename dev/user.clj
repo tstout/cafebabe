@@ -19,7 +19,10 @@
     '[cafebabe.methods :as meth]
     '[gloss.core :as gc]
     '[gloss.io :as gio]
-    '[clojure.tools.trace :as trace]))
+    '[clojure.tools.trace :as trace]
+    '[clojure.reflect :as cr]
+    '[clojure.pprint :as pp]
+    '[cafebabe.signature :as sig]))
 
 ;; Loading this was causing lein autoexpect to fail.
 ;;(load-vars)

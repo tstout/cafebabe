@@ -1,6 +1,9 @@
 (ns cafebabe.gen-opcodes
   (:require [pl.danieljanus.tagsoup :refer [parse]]))
 
+;;
+;; This was used to do a one-time generation of the JVM op-code table.
+;;
 
 ;(def op-page
 ;  (parse "https://en.wikipedia.org/wiki/Java_bytecode_instruction_listings"))

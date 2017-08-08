@@ -30,6 +30,7 @@
      :descriptor (cp-resolve class-data descriptor-index)
      :name       (cp-resolve class-data name-index)}))
 
+
 (defn name-type [class-data index]
   (let [{:keys [name descriptor]} (cp-resolve class-data index)]
     {:name       name
@@ -53,10 +54,15 @@
        :offset offset}
       (name-type class-data name-and-type-index))))
 
-;;
-;; REPL experiments
-;;
-(comment
-  (def t-data (rdr/parse-class cafebabe.prototypes.PropsAndMethods))
-  (cp/cp-resolve t-data 1)
+
+
+;; TODO - Add methods to add a method ref
+(defn cp-add-to-end
+  "Add a constant to a class constant pool"
+  [class-data c]
+
   )
+
+
+
+
