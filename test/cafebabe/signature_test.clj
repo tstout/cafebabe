@@ -1,6 +1,6 @@
 (ns cafebabe.signature-test
   (:require
-    [expectations :refer :all])
+    [expectations :refer [expect]])
   (:require [cafebabe.signature :refer [xfrm-sig]])
   (:import (cafebabe.prototypes PropsAndMethods)))
 
