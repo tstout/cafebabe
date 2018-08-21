@@ -1,5 +1,5 @@
 # Introduction to cafebabe
 
-..TODO.. but design thoughts here...
+..TODO.. put design thoughts here...
 
 

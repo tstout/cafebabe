@@ -12,12 +12,14 @@ the application of functional techniques towards a simpler implementation of a b
 code manipulation library.
 
 ## Usage
-...Nothing to see yet...
+cafebabe
+Given a java class, transform the raw bytes into a clojure data structure
+
 
 
 ## License
 
-Copyright © 2017 Todd Stout
+Copyright © 2018 Todd Stout
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
