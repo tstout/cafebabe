@@ -1,13 +1,20 @@
 (ns cafebabe.reader-test
   (:require [expectations :refer :all]
-            [cafebabe.reader :refer [decode-class]]
-            [cafebabe.fixtures :refer [empty-class]])
+            [cafebabe.reader :refer [decode-class decode-class-file]]
+            [cafebabe.fixtures :refer [empty-class]]
+            [clojure.string :as str])
   (:import (java.io ByteArrayOutputStream)
            (cafebabe.prototypes Empty)))
 
 
+(defn class-file-path
+  "Used to read prototype class files for testing purposes"
+  [^Class c]
+  (let [cname (-> c .getName (str/replace "." "/"))]
+    (str "target/classes/" cname ".class")))
+
 ;;
-;; Verify decode class creates data which
+;; Verify decode-class creates data which
 ;; conforms to the expected structure for
 ;; a minimal, empty java class.
 ;; An empty class has the following shape:
@@ -39,6 +46,14 @@
 ;;
 (expect empty-class
         (decode-class Empty))
+
+(expect empty-class
+        (->
+          Empty
+          class-file-path
+          decode-class-file))
+
+
 
 
 

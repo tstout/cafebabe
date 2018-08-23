@@ -26,7 +26,7 @@
   (let [{:keys [class-inst data]} c-data
         c-bytes (encode-class data)
         c-file (class-bytes class-inst)]
-    (prn (str "Verifying chk-sum for " class-inst))
+    (println (str "Verifying chk-sum for " class-inst))
     (expect (not-empty data))
     (expect (md5 c-bytes) (md5 c-file))))
 

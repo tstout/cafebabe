@@ -16,12 +16,6 @@
     (io/copy (io/input-stream src) out)
     (.toByteArray out)))
 
-(defn class-file-path
-  "Used to read prototype class files for testing purposes"
-  [^Class c]
-  (let [cname (-> c .getName (str/replace "." "/"))]
-    (str "target/classes/" cname ".class")))
-
 (defn class-stream
   "Given a class, use the class loader to obtain in input stream of the
   raw byte definition of the class"
@@ -41,10 +35,6 @@
   (with-open [out (ByteArrayOutputStream.)]
     (io/copy (class-stream c) out)
     (.toByteArray out)))
-
-(defn class-bytes-from-file [path]
-  ())
-
 
 (defn fix-nil-repeated
   "If the class has no fields or interfaces, the gloss codec I have
@@ -85,16 +75,32 @@
                          vec)]
     (update class-data :constant-pool (fn [_] updated-fields))))
 
-(defn decode-class
-  "Convert a class definition to a clojure data structure."
-  [^Class c]
+(defn decode-class-bytes
+  "Convert a byte array containing a class definition to clojure data."
+  [b]
   (->
     class-codec
-    (decode (class-bytes c) false)
+    (decode b false)
     (fix-nil-repeated :interfaces)
     (fix-nil-repeated :fields)
     fix-nil-field-attrs
     fix-nil-utf8))
+
+(defn decode-class
+  "Convert a class definition to clojure data."
+  [^Class c]
+  (->
+    c
+    class-bytes
+    decode-class-bytes))
+
+(defn decode-class-file
+  "Convert a class file to clojure data"
+  [src]
+  (->
+    src
+    slurp-bytes
+    decode-class-bytes))
 
 ;(defn load-class [name bytes]
 ;  (.defineClass
@@ -107,12 +113,6 @@
   (->
     (DynamicClassLoader.)
     (.defineClass name bytes nil)))
-
-
-(defn load-class-file []
-  )
-
-
 
 
 ;;
