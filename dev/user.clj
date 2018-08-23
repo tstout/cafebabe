@@ -1,11 +1,12 @@
-(ns user)
+(ns user
+  (:import (cafebabe.prototypes PropsAndMethods)))
 
 ;;
 ;; Look at debugging tools mentioned here...
 ;; http://brownsofa.org/blog/2014/08/03/debugging-in-clojure-tools/http://brownsofa.org/blog/2014/08/03/debugging-in-clojure-tools/
 
 
-(prn "---REPL Customizations Initialized---")
+(println "---REPL Customizations Initialized---")
 
 (defn load-vars []
   (require
@@ -22,7 +23,8 @@
     '[clojure.tools.trace :as trace]
     '[clojure.reflect :as cr]
     '[clojure.pprint :as pp]
-    '[cafebabe.signature :as sig]))
+    '[cafebabe.signature :as sig])
+  (import (cafebabe.prototypes Empty PropsAndMethods)))
 
 ;; Loading this was causing lein autoexpect to fail.
 ;;(load-vars)

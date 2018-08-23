@@ -16,28 +16,32 @@
     (io/copy (io/input-stream src) out)
     (.toByteArray out)))
 
-(defn class-file-path
-  "Used to read prototype class files for testing purposes"
+(defn class-stream
+  "Given a class, use the class loader to obtain in input stream of the
+  raw byte definition of the class"
   [^Class c]
-  (let [cname (-> c .getName (str/replace "." "/"))]
-    (str "target/classes/" cname ".class")))
+  (let [class-path (->
+                     c
+                     .getName
+                     (str/replace "." "/")
+                     (str ".class"))]
+    (-> c
+        .getClassLoader
+        (.getResourceAsStream class-path))))
 
-(defn class-bytes [^Class c]
-  (->
-    c
-    class-file-path
-    slurp-bytes))
-
-(defn class-bytes-from-file [path]
-  ())
-
+(defn class-bytes
+  "Given a java class, create a byte array of the raw class definition"
+  [^Class c]
+  (with-open [out (ByteArrayOutputStream.)]
+    (io/copy (class-stream c) out)
+    (.toByteArray out)))
 
 (defn fix-nil-repeated
   "If the class has no fields or interfaces, the gloss codec I have
   defined decodes a repeated to a nil. This nil causes encode to fail.
   I have not determined how to get gloss to decode an empty repeated
   frame into an empty vector.
-  This fix is necessary for encode to function properyly when a class
+  This fix is necessary for encode to function properly when a class
   contains no interfaces or methods."
   [class-data k]
   (if (nil? (k class-data))
@@ -71,14 +75,32 @@
                          vec)]
     (update class-data :constant-pool (fn [_] updated-fields))))
 
-(defn decode-class [^Class c]
+(defn decode-class-bytes
+  "Convert a byte array containing a class definition to clojure data."
+  [b]
   (->
     class-codec
-    (decode (class-bytes c) false)
+    (decode b false)
     (fix-nil-repeated :interfaces)
     (fix-nil-repeated :fields)
     fix-nil-field-attrs
     fix-nil-utf8))
+
+(defn decode-class
+  "Convert a class definition to clojure data."
+  [^Class c]
+  (->
+    c
+    class-bytes
+    decode-class-bytes))
+
+(defn decode-class-file
+  "Convert a class file to clojure data"
+  [src]
+  (->
+    src
+    slurp-bytes
+    decode-class-bytes))
 
 ;(defn load-class [name bytes]
 ;  (.defineClass
@@ -91,12 +113,6 @@
   (->
     (DynamicClassLoader.)
     (.defineClass name bytes nil)))
-
-
-(defn load-class-file []
-  )
-
-
 
 
 ;;
