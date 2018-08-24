@@ -72,11 +72,11 @@ in the cafebabe.writer namespace.
   (:import (cafebabe.prototypes Empty)))
   
 (def transformed-class 
-    (->
-      Empty
-      decode-class
-      some-transform
-      encode-class))  
+  (->
+    Empty
+    decode-class
+    some-transform
+    encode-class))  
 ```
 The some-transform function is a bit hand-wavy. I plan on providing various class transformation functions in the near
 future.
