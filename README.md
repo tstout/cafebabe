@@ -19,14 +19,14 @@ to the class file specification.
 For example, given a java class, transform the raw bytes of the class into clojure data.
 
 cafebabe/prototypes/Empty.java
-```
+```java
 package cafebabe.prototypes;
 
 public class Empty {
 }
 ```
 
-```
+```clojure
 (ns an.example
   (:require [cafebabe.reader :refer [decode-class]])
   (:import (cafebabe.prototypes Empty)))
@@ -35,7 +35,7 @@ public class Empty {
 ```
 The result of (decode-class Empty) is
  
-```
+```clojure
 {:header        {:magic 3405691582 :major-version 0 :minor-version 52}
  :constant-pool [{:constant-type :c-method-ref :class-index 3 :name-and-type-index 10}
                  {:constant-type :c-class :name-index 11}
@@ -65,7 +65,7 @@ The cafebabe.reader namespace also contains decode-class functions for a file, a
 The clojure data representing a class can be transformed into a binary form consumable by the JVM via functions
 in the cafebabe.writer namespace.
 
-```
+```clojure
 (ns an.example
   (:require [cafebabe.reader :refer [decode-class]]
             [cafebabe.writer :refer [encode-class]])
